@@ -4,31 +4,33 @@ import Actors.AutonomousCar;
 import Actors.Car;
 import Actors.Direction;
 import Actors.DrivenCar;
-import Utils.SimulationConstants;
+import Utils.SimConstants;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 public class Intersection {
 
-    private ArrayList<Queue<Car>> cars;
-    private Queue<Car> crossings;
-    private long nextCrossTime = 0;
-    private long nextSpawnTime = 0;
+    private ArrayList<ArrayDeque<Car>> cars;
+    private ArrayDeque<Car> crossings;
+    private double nextCrossTime = 0;
+    private double nextSpawnTime = 0;
+    private double elapsedTime = 0;
 
     //Create a new Intersection object
     public Intersection() {
-        cars = new ArrayList<Queue<Car>>();
+
+        this.cars = new ArrayList<ArrayDeque<Car>>();
         for (int i = 0; i < 4; i++) {
-            cars.add(new LinkedList<Car>());
+            this.cars.add(new ArrayDeque<Car>());
         }
-        crossings = new LinkedList<Car>();
+
+        this.crossings = new ArrayDeque<Car>();
+
     }
 
     public void execute() {
 
+        this.elapsedTime += SimConstants.SIM_SAMPLE_RATE;
         spawnCarRandomly();
         crossCar();
 
@@ -37,14 +39,14 @@ public class Intersection {
     //Return the next car in the crossings queue if the crossing time of the last car has passed.
     public Car crossCar() {
 
-        if (System.currentTimeMillis() >= nextCrossTime && crossings.size() > 0) {
+        if (this.elapsedTime >= nextCrossTime && crossings.size() > 0) {
             //remove the car from the crossings array and the array of cars
             Car car = crossings.remove();
             int street = car.getStreet().ordinal();
             cars.get(street).remove();
 
-            nextCrossTime = System.currentTimeMillis() + (long)car.getCrossTime()*1000;
-            System.out.println("CAR CROSSING!");
+            nextCrossTime = this.elapsedTime + car.getCrossTime();
+            System.out.println("CAR CROSSING! (" + elapsedTime + ")");
 
             return car;
         }
@@ -55,22 +57,21 @@ public class Intersection {
 
     private void spawnCarRandomly() {
 
-        if (System.currentTimeMillis() >= nextSpawnTime) {
+        if (this.elapsedTime >= this.nextSpawnTime) {
 
             Random rand = new Random();
 
             int streetInt = rand.nextInt(4);
             int directionInt = rand.nextInt(3);
 
-            boolean autonomous = rand.nextDouble() <= SimulationConstants.AUTONOMOUS_PERCENTAGE;
+            boolean autonomous = rand.nextDouble() <= SimConstants.AUTONOMOUS_PERCENTAGE;
             Street street = Street.values()[streetInt];
             Direction dir = Direction.values()[directionInt];
 
             spawnCar(autonomous, street, dir);
 
-            nextSpawnTime = System.currentTimeMillis() +
-                    (long)(1000*(rand.nextDouble()*(SimulationConstants.CAR_SPAWN_TIME_MAX - SimulationConstants.CAR_SPAWN_TIME_MIN) +
-                            SimulationConstants.CAR_SPAWN_TIME_MIN));
+            nextSpawnTime = (this.elapsedTime + rand.nextDouble()*(SimConstants.CAR_SPAWN_TIME_MAX - SimConstants.CAR_SPAWN_TIME_MIN)
+                    + SimConstants.CAR_SPAWN_TIME_MIN);
 
         }
 
@@ -84,7 +85,7 @@ public class Intersection {
         //THIS LOGIC ADDS A CAR TO THE EVENT QUEUE BASED ON SPAWN TIME. TO BE CHANGED.
         crossings.add(car);
 
-        System.out.println("CAR SPAWNED! Autonomous = " + autonomous + ", Street = " + street + ", Direction = " + dir);
+        System.out.println("CAR SPAWNED! (" + elapsedTime + ") Autonomous = " + autonomous + ", Street = " + street + ", Direction = " + dir);
 
     }
 
