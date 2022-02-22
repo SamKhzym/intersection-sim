@@ -11,6 +11,15 @@ public class Car extends Actor {
     protected Street street;
 
     public Car(Direction dir, Street street) {
+        super();
+        this.dir = dir;
+        this.timeWaiting = 0;
+        this.crossing = false;
+        this.street = street;
+    }
+
+    public Car(Direction dir, Street street, double[] position, double[] vel, double[] accel) {
+        super(position, vel, accel);
         this.dir = dir;
         this.timeWaiting = 0;
         this.crossing = false;
@@ -23,6 +32,14 @@ public class Car extends Actor {
 
     public Street getStreet() {
         return this.street;
+    }
+
+    public void updateCar() {
+
+        if (this.crossing) {
+
+        }
+
     }
 
 }

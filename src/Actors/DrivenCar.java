@@ -11,6 +11,11 @@ public class DrivenCar extends Car {
         this.crossTime = getCrossTime();
     }
 
+    public DrivenCar(Direction dir, Street street, double[] position, double[] velocity, double[] acceleration) {
+        super(dir, street, position, velocity, acceleration);
+        this.crossTime = getCrossTime();
+    }
+
     @Override
     public double getCrossTime() {
 

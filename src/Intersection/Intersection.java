@@ -1,9 +1,6 @@
 package Intersection;
 
-import Actors.AutonomousCar;
-import Actors.Car;
-import Actors.Direction;
-import Actors.DrivenCar;
+import Actors.*;
 import Utils.SimConstants;
 
 import java.util.*;
@@ -28,11 +25,13 @@ public class Intersection {
 
     }
 
-    public void execute() {
+    public ArrayList<Actor> execute() {
 
         this.elapsedTime += SimConstants.SIM_SAMPLE_RATE;
         spawnCarRandomly();
+        updateActorPositions();
         crossCar();
+        return getAllActors();
 
     }
 
@@ -79,13 +78,40 @@ public class Intersection {
 
     private void spawnCar(boolean autonomous, Street street, Direction dir) {
 
-        Car car = autonomous ? new AutonomousCar(dir, street) : new DrivenCar(dir, street);
+        Car car = autonomous ?
+                new AutonomousCar(dir, street, new double[]{0,0}, new double[]{5,5}, new double[]{0,0}) :
+                new DrivenCar(dir, street, new double[]{0,0}, new double[]{5,5}, new double[]{0,0});
+
         cars.get(street.ordinal()).add(car);
 
         //THIS LOGIC ADDS A CAR TO THE EVENT QUEUE BASED ON SPAWN TIME. TO BE CHANGED.
         crossings.add(car);
 
         System.out.println("CAR SPAWNED! (" + elapsedTime + ") Autonomous = " + autonomous + ", Street = " + street + ", Direction = " + dir);
+
+    }
+
+    private void updateActorPositions() {
+        for (Deque<Car> queue : cars) {
+            for (Car car: queue) {
+                car.updateKinematics(SimConstants.SIM_SAMPLE_RATE);
+            }
+        }
+    }
+
+    private ArrayList<Actor> getAllActors() {
+
+        ArrayList<Actor> actors = new ArrayList<Actor>();
+
+        for (Deque<Car> queue : cars) {
+            for (Car car: queue) {
+                actors.add(car);
+            }
+        }
+
+        //PEDESTRIANS TO BE ADDED
+
+        return actors;
 
     }
 
