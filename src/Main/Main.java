@@ -23,7 +23,7 @@ public class Main {
             graphics.drawActors(actors);
 
             //Pause simulation for viewing in real time
-            Thread.currentThread().sleep((long)(SimConstants.SIM_SAMPLE_RATE*1000));
+            Thread.currentThread().sleep((long)(SimConstants.SIM_SAMPLE_RATE*1000)/4);
 
         }
 

@@ -21,16 +21,30 @@ public class Actor {
 
     public double[] getPosition() { return this.position; }
 
-    public void setPosition(double[] position) {
-        this.position = position;
+    public double[] getVelocity() { return this.velocity; }
+
+    public double[] getAcceleration() { return this.acceleration; }
+
+    public void setPosCartesian(double[] position) { this.position = position; }
+
+    public void setVelCartesian(double[] vel) { this.velocity = vel; }
+
+    public void setVelPolar(double vel, double heading) {
+        this.velocity[0] = vel*Math.cos(heading);
+        this.velocity[1] = vel*Math.sin(heading);
     }
 
-    public void setVelocity(double[] vel) {
-        this.velocity = vel;
+    public void setAccelCartesian(double[] accel) { this.acceleration = accel; }
+
+    public void setAccelPolar(double accel, double heading) {
+        this.acceleration[0] = accel*Math.cos(heading);
+        this.acceleration[1] = accel*Math.sin(heading);
     }
 
-    public void setAcceleration(double[] accel) {
-        this.acceleration = accel;
+    public double getHeading() { return Math.atan2(this.velocity[1], this.velocity[0]); }
+
+    public double getVelMag() {
+        return Math.sqrt( Math.pow(this.velocity[0], 2) + Math.pow(this.velocity[1], 2) );
     }
 
     public void updateKinematics(double sampleTime) {

@@ -41,8 +41,9 @@ public class Intersection {
         if (this.elapsedTime >= nextCrossTime && crossings.size() > 0) {
             //remove the car from the crossings array and the array of cars
             Car car = crossings.remove();
+            car.setCrossing(true);
             int street = car.getStreet().ordinal();
-            cars.get(street).remove();
+            //cars.get(street).remove();
 
             nextCrossTime = this.elapsedTime + car.getCrossTime();
             System.out.println("CAR CROSSING! (" + elapsedTime + ")");
@@ -79,8 +80,8 @@ public class Intersection {
     private void spawnCar(boolean autonomous, Street street, Direction dir) {
 
         Car car = autonomous ?
-                new AutonomousCar(dir, street, new double[]{0,0}, new double[]{5,5}, new double[]{0,0}) :
-                new DrivenCar(dir, street, new double[]{0,0}, new double[]{5,5}, new double[]{0,0});
+                new AutonomousCar(dir, street, new double[]{200,200}, new double[]{0,0}, new double[]{0,0}) :
+                new DrivenCar(dir, street, new double[]{200,200}, new double[]{0,0}, new double[]{0,0});
 
         cars.get(street.ordinal()).add(car);
 
@@ -94,7 +95,7 @@ public class Intersection {
     private void updateActorPositions() {
         for (Deque<Car> queue : cars) {
             for (Car car: queue) {
-                car.updateKinematics(SimConstants.SIM_SAMPLE_RATE);
+                car.updateCar();
             }
         }
     }
