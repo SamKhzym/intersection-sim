@@ -12,6 +12,7 @@ public class Intersection {
     private double nextCrossTime = 0;
     private double nextSpawnTime = 0;
     private double elapsedTime = 0;
+    private Car carToRemove = null;
 
     //Create a new Intersection object
     public Intersection() {
@@ -42,12 +43,16 @@ public class Intersection {
             //remove the car from the crossings array and the array of cars
             Car car = crossings.remove();
             car.setCrossing(true);
-            int street = car.getStreet().ordinal();
-            //cars.get(street).remove();
 
             nextCrossTime = this.elapsedTime + car.getCrossTime();
             System.out.println("CAR CROSSING! (" + elapsedTime + ")");
 
+            if (carToRemove != null) {
+                int street = carToRemove.getStreet().ordinal();
+                this.cars.get(street).remove(carToRemove);
+            }
+
+            carToRemove = car;
             return car;
         }
         else
@@ -80,8 +85,8 @@ public class Intersection {
     private void spawnCar(boolean autonomous, Street street, Direction dir) {
 
         Car car = autonomous ?
-                new AutonomousCar(dir, street, new double[]{200,200}, new double[]{0,0}, new double[]{0,0}) :
-                new DrivenCar(dir, street, new double[]{200,200}, new double[]{0,0}, new double[]{0,0});
+                new AutonomousCar(dir, street) :
+                new DrivenCar(dir, street);
 
         cars.get(street.ordinal()).add(car);
 

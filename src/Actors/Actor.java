@@ -43,9 +43,7 @@ public class Actor {
 
     public double getHeading() { return Math.atan2(this.velocity[1], this.velocity[0]); }
 
-    public double getVelMag() {
-        return Math.sqrt( Math.pow(this.velocity[0], 2) + Math.pow(this.velocity[1], 2) );
-    }
+    public double getVelMag() { return Math.sqrt( Math.pow(this.velocity[0], 2) + Math.pow(this.velocity[1], 2) ); }
 
     public void updateKinematics(double sampleTime) {
         this.velocity[0] += this.acceleration[0]*sampleTime;
