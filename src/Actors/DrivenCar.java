@@ -2,7 +2,7 @@ package Actors;
 
 import Intersection.Street;
 import Utils.HelperMethods;
-import Utils.SimulationConstants;
+import Utils.SimConstants;
 
 public class DrivenCar extends Car {
 
@@ -16,18 +16,18 @@ public class DrivenCar extends Car {
 
         if (this.dir == Direction.LEFT)  {
             return HelperMethods.randomSampleFromDistribution(
-                    SimulationConstants.LEFT_CROSS_TIME_REG_MEAN,
-                    SimulationConstants.LEFT_CROSS_TIME_REG_STDDEV);
+                    SimConstants.LEFT_CROSS_TIME_REG_MEAN,
+                    SimConstants.LEFT_CROSS_TIME_REG_STDDEV);
         }
         else if (this.dir == Direction.RIGHT) {
             return HelperMethods.randomSampleFromDistribution(
-                    SimulationConstants.RIGHT_CROSS_TIME_REG_MEAN,
-                    SimulationConstants.RIGHT_CROSS_TIME_REG_STDDEV);
+                    SimConstants.RIGHT_CROSS_TIME_REG_MEAN,
+                    SimConstants.RIGHT_CROSS_TIME_REG_STDDEV);
         }
         else if (this.dir == Direction.STRAIGHT) {
             return HelperMethods.randomSampleFromDistribution(
-                    SimulationConstants.STRAIGHT_CROSS_TIME_REG_MEAN,
-                    SimulationConstants.STRAIGHT_CROSS_TIME_REG_STDDEV);
+                    SimConstants.STRAIGHT_CROSS_TIME_REG_MEAN,
+                    SimConstants.STRAIGHT_CROSS_TIME_REG_STDDEV);
         }
         else return -1;
 
