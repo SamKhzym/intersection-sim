@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class GraphicsHandler {
 
-    SimulationWindow window = new SimulationWindow();
+    SimulationWindow window;
     JFrame frame;
 
     public GraphicsHandler() {
@@ -17,7 +17,7 @@ public class GraphicsHandler {
     public void initializeSimulationWindow() {
 
         frame = new JFrame("Simulation");
-        window = new SimulationWindow();
+        window = new SimulationWindow(frame);
         frame.add(window);
         frame.setSize(SimConstants.WINDOW_WIDTH, SimConstants.WINDOW_HEIGHT);
         frame.setVisible(true);
@@ -32,4 +32,12 @@ public class GraphicsHandler {
         return frame;
     }
 
+    public SimulationWindow getWindow() {
+        return window;
+    }
+
+    public void drawPause(boolean paused) {
+        window.setPaused(paused);
+        window.repaint();
+    }
 }

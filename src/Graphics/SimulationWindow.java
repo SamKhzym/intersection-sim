@@ -1,28 +1,27 @@
 package Graphics;
 
 import Actors.Actor;
-import Actors.Car;
 import Utils.SimConstants;
 
 import java.awt.Graphics2D;
 import java.awt.Graphics;
 import java.awt.RenderingHints;
 import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.geom.Line2D;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class SimulationWindow extends JPanel {
 
     private Graphics2D g2d;
     private ArrayList<Actor> actors;
+    private JFrame frame;
+    private boolean paused;
 
-    public SimulationWindow() {
+    public SimulationWindow(JFrame frame) {
         actors = new ArrayList<>();
+        this.frame = frame;
+        paused = false;
     }
 
     @Override
@@ -60,10 +59,18 @@ public class SimulationWindow extends JPanel {
             //change to include scaling factor
             g2d.fillOval(posX, posY, carWidth, carHeight);
         }
+
+        if (paused) {
+            g2d.drawString("PAUSED",0,10);
+        }
     }
 
     public void drawActors(ArrayList<Actor> actors) {
         this.actors = actors;
         this.repaint();
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
     }
 }
