@@ -15,12 +15,10 @@ public class SimulationWindow extends JPanel {
 
     private Graphics2D g2d;
     private ArrayList<Actor> actors;
-    private JFrame frame;
     private boolean paused;
 
-    public SimulationWindow(JFrame frame) {
+    public SimulationWindow() {
         actors = new ArrayList<>();
-        this.frame = frame;
         paused = false;
     }
 

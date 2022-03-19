@@ -17,7 +17,7 @@ public class GraphicsHandler {
     public void initializeSimulationWindow() {
 
         frame = new JFrame("Simulation");
-        window = new SimulationWindow(frame);
+        window = new SimulationWindow();
         frame.add(window);
         frame.setSize(SimConstants.WINDOW_WIDTH, SimConstants.WINDOW_HEIGHT);
         frame.setVisible(true);
