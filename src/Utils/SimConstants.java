@@ -4,7 +4,7 @@ public class SimConstants {
 
     //SIMULATION CONSTANTS
 
-    public static final double SIM_SAMPLE_RATE = 0.05;
+    public static final double SIM_SAMPLE_RATE = 0.01;
 
     public static final double LEFT_CROSS_TIME_AUTO_MEAN = 7;
     public static final double LEFT_CROSS_TIME_AUTO_STDDEV = 2;
@@ -42,4 +42,5 @@ public class SimConstants {
 
     public static final int GRAPHICS_SCALING_FACTOR = 12;
 
+    public static final int FPS = 120;
 }

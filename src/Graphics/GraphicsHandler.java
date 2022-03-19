@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class GraphicsHandler {
 
     SimulationWindow window = new SimulationWindow();
+    JFrame frame;
 
     public GraphicsHandler() {
         initializeSimulationWindow();
@@ -15,7 +16,7 @@ public class GraphicsHandler {
 
     public void initializeSimulationWindow() {
 
-        JFrame frame = new JFrame("Simulation");
+        frame = new JFrame("Simulation");
         window = new SimulationWindow();
         frame.add(window);
         frame.setSize(SimConstants.WINDOW_WIDTH, SimConstants.WINDOW_HEIGHT);
@@ -25,6 +26,10 @@ public class GraphicsHandler {
 
     public void drawActors(ArrayList<Actor> actors) {
         this.window.drawActors(actors);
+    }
+
+    public JFrame getFrame() {
+        return frame;
     }
 
 }
