@@ -14,6 +14,8 @@ public class Intersection {
     private double elapsedTime = 0;
     private Car carToRemove = null;
 
+    boolean first = true;
+
     //Create a new Intersection object
     public Intersection() {
 
