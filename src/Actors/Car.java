@@ -1,5 +1,6 @@
 package Actors;
 
+import Graphics.GraphicsHandler;
 import Intersection.Street;
 import Utils.SimConstants;
 

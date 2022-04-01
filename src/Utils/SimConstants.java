@@ -4,7 +4,7 @@ public class SimConstants {
 
     //SIMULATION CONSTANTS
 
-    public static final double SIM_SAMPLE_RATE = 0.1;
+    public static final double SIM_SAMPLE_RATE = 0.01;
 
     public static final double LEFT_CROSS_TIME_AUTO_MEAN = 7;
     public static final double LEFT_CROSS_TIME_AUTO_STDDEV = 2;
@@ -31,8 +31,8 @@ public class SimConstants {
 
     //GRAPHICS CONSTANTS
 
-    public static final int WINDOW_WIDTH = 700;
-    public static final int WINDOW_HEIGHT = 500;
+    public static final int WINDOW_WIDTH = 400;
+    public static final int WINDOW_HEIGHT = 400;
 
     public static final double CAR_WIDTH = 2;
     public static final double CAR_HEIGHT = 2;
@@ -42,6 +42,6 @@ public class SimConstants {
 
     public static final int GRAPHICS_SCALING_FACTOR = 12;
 
-    public static final int DRAW_TIME = 10;
+    public static final int DRAW_TIME = 120;
     public static final int PHYSICS_TIME = 60;
 }

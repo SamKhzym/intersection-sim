@@ -1,4 +1,4 @@
-package Graphics;
+package Stuff;
 
 public class Timer {
 
